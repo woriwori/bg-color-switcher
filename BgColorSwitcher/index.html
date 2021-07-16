@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <input id="input-hex" />
+      <input id="btn-change" type="button" value="변경" />
+      <input id="btn-reset" type="button" value="초기화" />
+    </div>
+  </body>
+  <script type="module">
+    import BgColorSwitcher from './BgColorSwitcher.js';
+
+    const inputEle = document.getElementById('input-hex');
+    const changeBtnEle = document.getElementById('btn-change');
+    const resetBtnEle = document.getElementById('btn-reset');
+    const bodyEle = document.getElementsByTagName('body')[0];
+
+    const switcher = BgColorSwitcher(inputEle);
+
+    switcher.bindHandler(changeBtnEle, 'click', () => {
+      const color = switcher.getInputValue();
+      switcher.changeBgColor(bodyEle, color);
+    });
+
+    switcher.bindHandler(resetBtnEle, 'click', () => {
+      switcher.resetInput();
+      switcher.changeBgColor(bodyEle, 'transparent');
+    });
+  </script>
+  <style>
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 20px);
+    }
+    #input-hex {
+      height: 30px;
+    }
+    input[type='button'] {
+      height: 37px;
+      width: 75px;
+      margin-left: 5px;
+    }
+  </style>
+</html>
